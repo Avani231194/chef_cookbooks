@@ -9,7 +9,7 @@ package 'wget' do
 action :install
 end
 
-rpm_package 'jenkins' do
+rpm_package 'mysql' do
 source 'http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm'
 action :install
 end

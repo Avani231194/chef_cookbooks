@@ -9,7 +9,7 @@ package %w(java-1.8.0-openjdk.x86_64 wget) do
 action :install
 end
 
-directory '/app' do
+directory "node['nexus']['dirname']" do
 action :create
 end
 
@@ -24,13 +24,11 @@ nexus_tar 'nexus_install' do
 title 'nexus'
 end
 
-
-
-template '/app/nexus/bin/nexus.rc' do
+template "#{node['nexus']['o_path']}/nexus.rc" do
 source 'nexus.rc.erb'
 end
 
-template '/app/nexus/bin/nexus.vmoptions' do
+template "#{node['nexus']['path']}/nexus.vmoptions" do
 source 'nexus.vmoptions.erb'
 end
 

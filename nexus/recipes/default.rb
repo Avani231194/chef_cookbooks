@@ -28,9 +28,9 @@ end
 
 
 
-#nexus_tar 'nexus_install' do
-#title 'nexus'
-#end
+nexus_tar 'nexus_install' do
+title 'nexus'
+end
 
 
 template "#{node['nexus']['o_path']}/nexus.rc" do

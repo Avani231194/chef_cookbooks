@@ -28,9 +28,9 @@ end
 
 
 
-nexus_tar 'nexus_install' do
-title 'nexus'
-end
+#nexus_tar 'nexus_install' do
+#title 'nexus'
+#end
 
 
 template "#{node['nexus']['o_path']}/nexus.rc" do
@@ -41,14 +41,17 @@ end
 
 template "#{node['nexus']['path']}/nexus.vmoptions" do
  source 'nexus.vmoptions.erb'
-  only_if do ! File.exist?("#{node['nexus']['path']}/nexus.vmoptions" ) end
+  variables({
+      :datapath => "#{node['nexus']['datapath']}"
+     }) 
+ only_if do ! File.exist?("#{node['nexus']['path']}/nexus.vmoptions" ) end
  action :create
 end
 
 link '/etc/init.d/nexus' do
   to '/app/nexus/bin/nexus'
  link_type :symbolic
- not_if { 'test -f /app/nexus/bin/nexus' }
+ not_if  "test -f /app/nexus/bin/nexus"
  action :create
 end
 
